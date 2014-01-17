@@ -7,8 +7,8 @@
         @import url(http://fonts.googleapis.com/css?family=Oswald);
         body,
         html {
-            background-color: #000;
-            color: #fff;
+            background-color: #fff;
+            color: #000;
             width: 100%;
             height: 100%;
             margin: 0;
@@ -45,60 +45,197 @@
 
 <body>
     <main>
-        <canvas id="canvas"></canvas>
+        <canvas id="canvas" onscroll="on_scroll()"></canvas>
         <p class="message">My site will look like this!<br>poodle<br>poodle<br>poodle<br>poodle<br>poodle <br>poodle<br>poodle<br>poodle</p>
     </main>
     <script type="text/javascript">
+
+
+
         var canvas = document.getElementById("canvas"),
             ctx = canvas.getContext("2d"),
             width = canvas.width = window.innerWidth,
-            height = canvas.height = window.innerHeight,
-            grad = null,
-            gradStops = {
-                speed: 0.5,
-                colA: {
-                    brightness: 255,
-                    lighten: 0
-                },
-                colB: {
-                    brightness: 255,
-                    lighten: 0
-                }
-            },
-            cycle = 0;
+            height = canvas.height = window.innerHeight;
 
-        function colorCycle(cycle, bright, light) {
-            bright = bright || 255;
-            light = light || 0;
-            cycle *= 0.1;
-            var r = ~~ (Math.sin(0.3 * cycle + 0) * bright + light),
-                g = ~~ (Math.sin(0.3 * cycle + 2) * bright + light),
-                b = ~~ (Math.sin(0.3 * cycle + 4) * bright + light);
+        draw();
 
-            return 'rgb(' + Math.min(r, 255) + ',' + Math.min(g, 255) + ',' + Math.min(b, 255) + ')';
+        var angle = -180;
+        var pos = {'x':400,'y':400};
+        var speed = 1;
+        var fps = 60;
+        function draw() {
+            setTimeout(function() {
+                requestAnimationFrame(draw);
+                ctx.clearRect(0,0,width,height);
+                moveRect();
+                drawRectangle();
+                
+            }, 1000 / fps);
+        }
+
+        var counter = 0;
+        function drawRectangle(){
+            ctx.save();
+
+            ctx.translate(pos.x+25,pos.y+25); 
+            ctx.rotate(angle*Math.PI/180);
+            ctx.translate(-pos.x-25,-pos.y-25);
+            //ctx.fillRect(pos.x,pos.y,50,50);
+            ctx.beginPath();
+            ctx.arc(pos.x,pos.y,10,0,2*Math.PI);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.moveTo(pos.x+5,pos.y);
+            ctx.lineTo(pos.x+30+2.5*(Math.cos(counter*2)),pos.y+10*(Math.sin(counter)));
+            //ctx.lineTo(pos.x+10+10*(Math.cos(counter*2)),pos.y+20*(Math.sin(counter)));
+
+            ctx.stroke();
+            
+
+            ctx.restore();
+
+            counter +=.1;
+        }
+        var turnSpeed = 1;
+        function moveRect(){
+            pos.x+= speed*Math.cos(angle * Math.PI / 180);
+            pos.y+= speed*Math.sin(angle * Math.PI / 180);
+
+            if(pos.x -30 < 0){
+                pos.x = 30;
+                angle +=turnSpeed;
+            }else if(pos.x + 40 > width){
+                pos.x = width - 40;
+                angle +=turnSpeed;
+            }
+
+            if(pos.y - 30< 0){
+                pos.y = 30;
+                angle +=turnSpeed;
+            }else if(pos.y + 30> height){
+                pos.y = height-30;
+                angle +=turnSpeed;
+            }
+        }
+        /**
+         * Returns a random integer between min and max
+         * Using Math.round() will give you a non-uniform distribution!
+         */
+        function getRandomInt (min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        function drawCircle(startX, startY, endX, endY) {
+            ctx.beginPath();
+            ctx.arc(startX,startY,100,0,2*Math.PI);
+            ctx.stroke();
         }
 
 
-        function colorize() {
-            cycle += gradStops.speed;
-            grad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-            grad.addColorStop(0, colorCycle(cycle, gradStops.colA.brightness, gradStops.colA.lighten));
-            grad.addColorStop(1, colorCycle(cycle + 60, gradStops.colB.brightness, gradStops.colB.lighten));
-            ctx.fillStyle = grad;
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            requestAnimationFrame(colorize);
-        }
-
-        setTimeout(function () {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = document.body.offsetHeight;
-            colorize();
-        }, 100);
 
         window.onresize = function () {
             height = canvas.height = document.body.offsetHeight;
             width = canvas.width = document.body.offsetWidth;
         };
+
+        window.onscroll = function(){
+            scrollTop = (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
+            console.log("messing");
+
+        }
+
+
+        var mousePos = {'x':0, 'y':0};
+        // ******** UPDATES mousePos WHENEVER MOUSE IS MOVED ******** //
+        function getMousePos(canvas, evt) 
+        {
+            var rect = canvas.getBoundingClientRect();
+            return {
+              x: Math.round((evt.clientX-rect.left)/(rect.right-rect.left)*canvas.width),
+              y: Math.round((evt.clientY-rect.top)/(rect.bottom-rect.top)*canvas.height)
+          };
+        }
+
+        var mp;
+        canvas.addEventListener('mousemove', function(evt) {
+            mp = getMousePos(canvas, evt);
+            mousePos.x = mp.x;
+            mousePos.y = mp.y;
+        }, false);
+        // ******* END UPDATES mousePos WHENEVER MOUSE IS MOVED ******* //
+
+        // ^^^^^^^^^^  INPUT INTERPRETATION FUNCTIONS  ^^^^^^^^^^ //
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // http://paulirish.com/2011/requestanimationframe-for-smart-animating/
+        // http://my.opera.com/emoller/blog/2011/12/20/requestanimationframe-for-smart-er-animating
+         
+        // requestAnimationFrame polyfill by Erik Möller
+        // fixes from Paul Irish and Tino Zijdel
+        (function() {
+            var lastTime = 0;
+            var vendors = ['ms', 'moz', 'webkit', 'o'];
+            for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
+                window.requestAnimationFrame = window[vendors[x]+'RequestAnimationFrame'];
+                window.cancelAnimationFrame = window[vendors[x]+'CancelAnimationFrame']
+                                           || window[vendors[x]+'CancelRequestAnimationFrame'];
+            }
+         
+            if (!window.requestAnimationFrame)
+                window.requestAnimationFrame = function(callback, element) {
+                    var currTime = new Date().getTime();
+                    var timeToCall = Math.max(0, 16 - (currTime - lastTime));
+                    var id = window.setTimeout(function() { callback(currTime + timeToCall); },
+                      timeToCall);
+                    lastTime = currTime + timeToCall;
+                    return id;
+                };
+         
+            if (!window.cancelAnimationFrame)
+                window.cancelAnimationFrame = function(id) {
+                    clearTimeout(id);
+                };
+        }());
+
     </script>
 </body>
 

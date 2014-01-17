@@ -27,8 +27,8 @@ jinja_auto = jinja2.Environment(autoescape=True,
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
-        self.response.write("<h1>KARL'S WEBSITE!</h1><br><img src=\"http://www.lowes.com/"
-            "images/LCI/Planning/HowTos/ht_BuildaSandbox_hero_image.jpg\" alt=\"poodle\">")
+        template = jinja_auto.get_template('backgroundtest.html')
+        self.response.out.write(template.render())
 
 
         
