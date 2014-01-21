@@ -5,49 +5,102 @@
     <title>A special message for you!</title>
     <style type="text/css">
         @import url(http://fonts.googleapis.com/css?family=Oswald);
-        body,
-        html {
-            background-color: #fff;
-            color: #000;
-            width: 100%;
-            height: 100%;
-            margin: 0;
-            padding: 0;
-            /*overflow: hidden;*/
-            font-family: 'Oswald', sans-serif;
-            font-size: 2em;
+        body {
+            background-color: #f3efe3;
         }
-        main {
+        p {
+            font-family: Georgia, serif;
+            font-size: 16px;
+        }
+        H1 {
+            font-family: 'Oswald', sans-serif;
+            padding-left: 3px;
+        }
+        .titlekarl {
+            position: fixed;
+            font-family: 'Oswald', sans-serif;
+            color: #d20000;
+            font-size: 48px;
+            top: 0px;
+            bottom: 0;
+            left: 0;
+        }
+        .container {
             position: relative;
+            padding: 71px 0 0 150px;
+        }
+        #sidebar {
+            position: fixed;
+            top: 71px;
+            bottom: 0;
+            left: -0px;
+            width: 140px;
+            padding: 0px;
+            border-right: 4px solid #000;
+        }
+        #header {
+            margin: 0 0 5px 0;
             text-align: center;
-            min-height: 100%;
+        }
+        #content {
+            border: 1px solid #000;
+            padding-right: 50px;
+            padding-left: 50px;
+            padding-top: 30px;
+            margin-left: 10%;
+            margin-right: 10%;
+            background-color: #fdfbf4;
+        }
+        #footer {
+            margin: 5px 0 0 0;
         }
         canvas {
-            z-index: 1;
+            z-index: -1;
             position: fixed;
             top: 0;
             left: 0
-        }
-        .message {
-            z-index: 20;
-            position: relative;
-            margin-top: 20%;
-            display: inline-block;
-            text-align: left;
-            height: 100px;
-        }
-        .tweet {
-            z-index: 40;
-            position: relative;
         }
     </style>
 </head>
 
 <body>
-    <main>
-        <canvas id="canvas" onscroll="on_scroll()"></canvas>
-        <p class="message">My site will look like this!<br>poodle<br>poodle<br>poodle<br>poodle<br>poodle <br>poodle<br>poodle<br>poodle</p>
-    </main>
+    <div class="titlekarl">KarlFloersch</div>
+    <canvas id="canvas" onscroll="on_scroll()"></canvas>
+    <div class="container">
+        <div id="sidebar">
+            <H1>Home<br>Blog<br>Projects<br>Contact
+               <hr style="height:4px;border:none;color:#000000;background-color:#000000;">
+               Currents</H1>
+        </div>
+        <div id="header">
+            <h1>Title!</h1>
+
+        </div>
+        <div id="content">
+            <p>A clock for a bicep ignores a bodice ripper near the girl. Another usually uxorious girl prays, and the somnambulist behind a menagé à trois takes a coffee break; however, some philosopher for the dissident sanitizes a tenor. A lunatic related to some
+                shadow completely throws a boy toward the piroshki at a tea party. Timosha and I took a bonbon (with the shadow, a starlet about the starlet, a few biceps, and the guardian angel defined by a toothpick) to arrive at a state of intimacy where we can
+                feverishly negotiate a prenuptial agreement with our midwife.</p>
+            <p>A clock for a bicep ignores a bodice ripper near the girl. Another usually uxorious girl prays, and the somnambulist behind a menagé à trois takes a coffee break; however, some philosopher for the dissident sanitizes a tenor. A lunatic related to some
+                shadow completely throws a boy toward the piroshki at a tea party. Timosha and I took a bonbon (with the shadow, a starlet about the starlet, a few biceps, and the guardian angel defined by a toothpick) to arrive at a state of intimacy where we can
+                feverishly negotiate a prenuptial agreement with our midwife.</p>
+            <p>A clock for a bicep ignores a bodice ripper near the girl. Another usually uxorious girl prays, and the somnambulist behind a menagé à trois takes a coffee break; however, some philosopher for the dissident sanitizes a tenor. A lunatic related to some
+                shadow completely throws a boy toward the piroshki at a tea party. Timosha and I took a bonbon (with the shadow, a starlet about the starlet, a few biceps, and the guardian angel defined by a toothpick) to arrive at a state of intimacy where we can
+                feverishly negotiate a prenuptial agreement with our midwife.</p>
+            <p>A clock for a bicep ignores a bodice ripper near the girl. Another usually uxorious girl prays, and the somnambulist behind a menagé à trois takes a coffee break; however, some philosopher for the dissident sanitizes a tenor. A lunatic related to some
+                shadow completely throws a boy toward the piroshki at a tea party. Timosha and I took a bonbon (with the shadow, a starlet about the starlet, a few biceps, and the guardian angel defined by a toothpick) to arrive at a state of intimacy where we can
+                feverishly negotiate a prenuptial agreement with our midwife.</p>
+            <p>A clock for a bicep ignores a bodice ripper near the girl. Another usually uxorious girl prays, and the somnambulist behind a menagé à trois takes a coffee break; however, some philosopher for the dissident sanitizes a tenor. A lunatic related to some
+                shadow completely throws a boy toward the piroshki at a tea party. Timosha and I took a bonbon (with the shadow, a starlet about the starlet, a few biceps, and the guardian angel defined by a toothpick) to arrive at a state of intimacy where we can
+                feverishly negotiate a prenuptial agreement with our midwife.</p>
+            <p>A clock for a bicep ignores a bodice ripper near the girl. Another usually uxorious girl prays, and the somnambulist behind a menagé à trois takes a coffee break; however, some philosopher for the dissident sanitizes a tenor. A lunatic related to some
+                shadow completely throws a boy toward the piroshki at a tea party. Timosha and I took a bonbon (with the shadow, a starlet about the starlet, a few biceps, and the guardian angel defined by a toothpick) to arrive at a state of intimacy where we can
+                feverishly negotiate a prenuptial agreement with our midwife.</p>
+
+        </div>
+        <footer>This is the coolest site ever!</footer>
+    </div>
+
+
     <script type="text/javascript">
 
 

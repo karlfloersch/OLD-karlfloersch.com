@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Karl Floersch | Portfolio</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/base.css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+</head>
+
+<body>
+    <div id="titlekarl">KarlFloersch</div>
+    <!-- ADD WHEN YOU FIGURE OUT THE REST!<canvas id="canvas" onscroll="on_scroll()" src="/static/javascript/blindbackground.js"></canvas>-->
+    <div class="container">
+        <div id="sidebar">
+            <H1>
+                <a href="/" class="navigationLink">Home</a><br>
+                <a href="/blog" class="navigationLink">Blog</a><br>
+                <a href="/projects" class="navigationLink">Projects</a><br>
+                <a href="/contact" class="navigationLink">Contact</a><br>
+               <hr style="height:4px;border:none;color:#000000;background-color:#000000;">
+               Currents
+           </H1>
+            <div class="currents">
+                <H3>New Post</H3>
+                Some of the content that is from the post. This is very good stuff indeed. When vargan is pargan then you know that yourbargan was a good one.
+            </div>
+            <br>
+            <div class="currents">
+                <H3>New Post</H3>
+                Some of the content that is from the post. This is very good stuff indeed. When vargan is pargan then you know that yourbargan was a good one.
+            </div>
+        </div>
+        {% block body %} 
+        {% endblock %}
+        <footer>Proudly powered by Karl</footer>
+    </div>
+
+</body>
+
+</html>

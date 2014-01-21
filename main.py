@@ -27,11 +27,19 @@ jinja_auto = jinja2.Environment(autoescape=True,
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
-        template = jinja_auto.get_template('backgroundtest.html')
+        template = jinja_auto.get_template('base.html')
+        self.response.out.write(template.render())
+
+class HomeHandler(webapp2.RequestHandler):
+    def get(self):
+        template = jinja_auto.get_template('home.html')
         self.response.out.write(template.render())
 
 
         
 app = webapp2.WSGIApplication([
-    ('/', MainHandler)
+    ('/', HomeHandler),
+    ('/blog/?', MainHandler),
+    ('/projects/?', MainHandler),
+    ('/contact/?', MainHandler)
 ], debug=True)
