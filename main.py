@@ -25,17 +25,20 @@ import re
 import data
 import static_handlers
 import sl_handlers
+import bpe_handlers
 from google.appengine.ext import db
 
 ###
 # USE FOR MAPPING PAGE TO HANDLER
+PAGE_RE = r'(/(?:[a-zA-Z0-9_-]+/?)*)'
 app = webapp2.WSGIApplication([
     ('/', static_handlers.HomeHandler),
-    ('/blog/?', static_handlers.MainHandler),
+    ('/blog/?', bpe_handlers.BlogHandler),
     ('/projects/?', static_handlers.MainHandler),
     ('/contact/?', static_handlers.MainHandler),
-    ('/signupsecret', sl_handlers.SignupHandler),
-    ('/9z4b3ty6x9lxva0u3u19', sl_handlers.LoginHandler)
+    ('/9z4b3ty6x9lxva0u3u19', sl_handlers.LoginHandler),
+    ('/blog/newpost', bpe_handlers.EditPostHandler),
+    ('/blog/_edit' + PAGE_RE, bpe_handlers.EditPostHandler)
 ], debug=True)
 #-	-	-	-	-	-	-	-	-#
 

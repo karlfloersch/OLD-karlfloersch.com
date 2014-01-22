@@ -31,3 +31,24 @@ class BaseHandler(webapp2.RequestHandler):
 		user_cookie = "%s|%s" % (str(user.key().id()), pw_hash)
 		self.response.headers.add_header('Set-Cookie', 'user=%s; Path=/' % str(user_cookie))
 		return True
+
+	def check_login(self):
+		user_cookie = self.request.cookies.get('user', '0')
+		if not "|" in user_cookie:
+			return False
+		c = user_cookie.split('|')
+		if len(c) < 2:
+			return False
+		user_id = c[0]
+		user_hash = c[1]
+		if not user_id.isdigit():
+			return False
+		user = data.User.get_by_id(int(user_id))
+		if user is None:
+			return False
+		correct_hash = user.password_hash.split('|')[0]
+		correct_cookie = "%s|%s" % (user_id, correct_hash)
+
+		if not correct_cookie == user_cookie:
+			return False
+		return True

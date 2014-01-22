@@ -18,7 +18,7 @@ class User(db.Model):
 
 
 
-class BlogEntry(db.Model):
+class Post(db.Model):
 	url = db.StringProperty(required = True)
 	title = db.StringProperty(required = True)
 	content = db.TextProperty(required = True)
