@@ -2,13 +2,14 @@
 
 
 {% block body %}
-<H1>Hi!  This is Karl's BLOG!</H1>
-   		
+<div>	
+	<H1 id="header">the Blog</H1>
 {% for post in posts %}
-	<div class="post">
-		<div class="post-title">{{post.title}}</div>
-		<pre class="post-body">{{post.content}}</pre>
+	<div class="blogContentBox">
+		<H1>{{post.title}}</H1>
+		{{post.content[:300]}}<br>...<a href="/blog{{post.url}}">Read More</a>...
 	</div>
+	<br>
 {% endfor %}
-
+</div>
 {% endblock %}

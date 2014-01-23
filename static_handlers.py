@@ -12,3 +12,7 @@ class MainHandler(handlers.BaseHandler):
 class HomeHandler(handlers.BaseHandler):
     def get(self):
         self.write_template('home.html')
+
+class ProjectsHandler(handlers.BaseHandler):
+    def get(self):
+        self.write_template('project-page.html')

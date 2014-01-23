@@ -21,13 +21,13 @@
                Currents
            </H1>
             <div class="currents">
-                <H3>New Post</H3>
-                Some of the content that is from the post. This is very good stuff indeed. When vargan is pargan then you know that yourbargan was a good one.
+                <H3><a href="{{ post1_url }}" class="navigationLink">{{ post1_title }}</a></H3>
+                {{ post1_content }}
             </div>
             <br>
             <div class="currents">
-                <H3>New Post</H3>
-                Some of the content that is from the post. This is very good stuff indeed. When vargan is pargan then you know that yourbargan was a good one.
+                <H3><a href="{{ post2_url }}" class="navigationLink">{{ post2_title }}</a></H3>
+                {{ post2_content }}
             </div>
         </div>
         {% block body %} 
