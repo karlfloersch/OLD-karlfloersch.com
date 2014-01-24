@@ -16,3 +16,7 @@ class HomeHandler(handlers.BaseHandler):
 class ProjectsHandler(handlers.BaseHandler):
     def get(self):
         self.write_template('project-page.html')
+
+class ContactHandler(handlers.BaseHandler):
+    def get(self):
+        self.write_template('contact.html')

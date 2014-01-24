@@ -8,11 +8,33 @@
 	</H1>
 </div>
 <div id="project-content">
-	<img src="http://www.dogbreedinfo.com/images14/PoodleMiniPeanutpuppypeanut9wks905008.JPG" alt="this is a poodle">
-	<img src="http://www.dogbreedinfo.com/images14/PoodleMiniPeanutpuppypeanut9wks905008.JPG" alt="this is a poodle">
-	<img src="http://www.dogbreedinfo.com/images14/PoodleMiniPeanutpuppypeanut9wks905008.JPG" alt="this is a poodle">
-	<img src="http://www.dogbreedinfo.com/images14/PoodleMiniPeanutpuppypeanut9wks905008.JPG" alt="this is a poodle">
-	<img src="http://www.dogbreedinfo.com/images14/PoodleMiniPeanutpuppypeanut9wks905008.JPG" alt="this is a poodle">
-	<img src="http://www.dogbreedinfo.com/images14/PoodleMiniPeanutpuppypeanut9wks905008.JPG" alt="this is a poodle">
+	<a href="/blog/Archery_Defense">
+	<img src="http://karlfloersch.appspot.com/static/images/archerydefense_cover.jpg" alt="Archery Defense" class="project-image" onmouseover="greyIn(this)" onmouseout="greyOut(this)">
+	</a>
+
+	<a href="/blog/Ear_Boy">
+	<img src="http://karlfloersch.appspot.com/static/images/earboy_cover.jpg" alt="Ear Boy" class="project-image" onmouseover="greyIn(this)" onmouseout="greyOut(this)">
+	</a>
+
+	<a href="/blog/Chroma">
+	<img src="http://karlfloersch.appspot.com/static/images/chroma_cover.jpg" alt="Chroma" class="project-image" onmouseover="greyIn(this)" onmouseout="greyOut(this)">
+	</a>
+
+	<a href="/blog/The_Bubble_Game">
+	<img src="http://karlfloersch.appspot.com/static/images/thebubblegame_cover.jpg" alt="The Bubble Game" class="project-image" onmouseover="greyIn(this)" onmouseout="greyOut(this)">
+	</a>
 </div>
+<script type="text/javascript">
+	function greyIn(el)
+	{
+		el.style.transition = "-webkit-filter 0.5s linear 0s";
+		el.style.webkitFilter = "saturate(300%)";
+	}
+	function greyOut(el)
+	{
+		el.style.transition = "-webkit-filter 0.5s linear 0s";
+		el.style.webkitFilter = "saturate(100%)";
+	}
+</script>
+
 {% endblock %}

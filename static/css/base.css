@@ -99,10 +99,10 @@ img {
     top:1px;
 }
 
-a:link {color:#ff0000;}  
-a:visited {color:#410002;}
-a:hover {color:#d20000;} 
-a:active {color:#410002;} 
+a:link {color:#950000;}  
+a:visited {color:#575757;}
+a:hover {color:#ff0000;} 
+a:active {color:#575757;} 
 
 a.navigationLink:link { color: black; text-decoration:none;}
 a.navigationLink:visited { color: black; text-decoration:none;}
@@ -111,6 +111,26 @@ a.navigationLink:hover { color: #d20000; text-decoration:none;}
 a.homeNavigationLink:link { color: black; text-decoration:none;}
 a.homeNavigationLink:visited { color: black; text-decoration:none;}
 a.homeNavigationLink:hover { color: #d20000; text-decoration:none;}
+
+@media screen and (max-width: 1135px) {
+    img.project-image {
+        display: block;
+        margin-left: auto;
+        margin-right: auto 
+    }
+}
+
+img.centered-image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.centered {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
 
 #sidebar {
     position: fixed;
@@ -133,12 +153,16 @@ a.homeNavigationLink:hover { color: #d20000; text-decoration:none;}
     margin-right: 10%;
     background-color: #fdfbf4;
 }
+
+
 #project-content {
     padding-right: 5px;
-    padding-left: 5px;
+    padding-left: 8px;
     padding-top: 30px;
-    margin-left: 5%;
-    margin-right: 5%;
+    padding-bottom: 30px;
+    max-width: 950px;
+    margin-left: auto;
+    margin-right: auto;
     background-color: #fdfbf4;
 }
 #homeTitle {

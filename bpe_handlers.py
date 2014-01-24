@@ -96,14 +96,14 @@ class EditPostHandler(handlers.BaseHandler):
 				post.content = content
 				post.put()
 				top_posts(True)
-				self.redirect("/")
+				self.redirect("/blog" + url)
 				return
 
 
 		a = data.Post(url = url, title = title, content = content)
 		a.put()
 		top_posts(True)
-		self.redirect("/blog")
+		self.redirect("/blog" + url)
 
 
 

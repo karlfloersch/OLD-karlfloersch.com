@@ -35,7 +35,7 @@ app = webapp2.WSGIApplication([
     ('/', static_handlers.HomeHandler),
     ('/blog/?', bpe_handlers.BlogHandler),
     ('/projects/?', static_handlers.ProjectsHandler),
-    ('/contact/?', static_handlers.MainHandler),
+    ('/contact/?', static_handlers.ContactHandler),
     ('/signup', sl_handlers.SignupHandler),
     ('/9z4b3ty6x9lxva0u3u19', sl_handlers.LoginHandler),
     ('/blog/newpost', bpe_handlers.EditPostHandler),
