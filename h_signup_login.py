@@ -29,13 +29,6 @@ class LoginHandler(handlers.BaseHandler):
 
 
 
-
-
-
-
-
-
-
 class SignupHandler(handlers.BaseHandler):
 	def get(self):
 		needNewAdmin = False;

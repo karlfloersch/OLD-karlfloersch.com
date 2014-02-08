@@ -13,13 +13,16 @@ class BaseHandler(webapp2.RequestHandler):
 		else:
 			template = main.jinja_no_auto.get_template(filename)
 		currents = main.get_currents()
-		t_values['post1_title'] = currents['post1'][0]
-		t_values['post1_content'] = currents['post1'][1]
-		t_values['post1_url'] = "/blog" + currents['post1'][2]
-		t_values['post2_title'] = currents['post2'][0]
-		t_values['post2_content'] = currents['post2'][1]
-		t_values['post2_url'] = "/blog" + currents['post2'][2]
-		self.response.out.write(template.render(t_values))
+		if currents == False:
+			self.response.out.write(template.render(t_values))
+		else:
+			t_values['post1_title'] = currents['post1'][0]
+			t_values['post1_content'] = currents['post1'][1]
+			t_values['post1_url'] = "/blog" + currents['post1'][2]
+			t_values['post2_title'] = currents['post2'][0]
+			t_values['post2_content'] = currents['post2'][1]
+			t_values['post2_url'] = "/blog" + currents['post2'][2]
+			self.response.out.write(template.render(t_values))
 
 	def login_user(self, username, password):
 		has_error = False

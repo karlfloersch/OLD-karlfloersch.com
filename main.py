@@ -23,25 +23,25 @@ import string
 import hashlib
 import re
 import data
-import static_handlers
-import sl_handlers
-import bpe_handlers
+import h_static
+import h_signup_login
+import h_edit_view_posts
 from google.appengine.ext import db
 
 ###
 # USE FOR MAPPING PAGE TO HANDLER
 PAGE_RE = r'(/(?:[a-zA-Z0-9_-]+/?)*)'
 app = webapp2.WSGIApplication([
-    ('/', static_handlers.HomeHandler),
-    ('/blog/?', bpe_handlers.BlogHandler),
-    ('/projects/?', static_handlers.ProjectsHandler),
-    ('/contact/?', static_handlers.ContactHandler),
-    ('/signup', sl_handlers.SignupHandler),
-    ('/9z4b3ty6x9lxva0u3u19', sl_handlers.LoginHandler),
-    ('/blog/newpost', bpe_handlers.EditPostHandler),
-    ('/blog/_edit' + PAGE_RE, bpe_handlers.EditPostHandler),
-    ('/blog/_delete' + PAGE_RE, bpe_handlers.DeletePostHandler),
-    ('/blog' + PAGE_RE, bpe_handlers.ViewPostHandler)
+    ('/', h_static.HomeHandler),
+    ('/blog/?', h_edit_view_posts.BlogHandler),
+    ('/projects/?', h_static.ProjectsHandler),
+    ('/contact/?', h_static.ContactHandler),
+    ('/signup', h_signup_login.SignupHandler),
+    ('/9z4b3ty6x9lxva0u3u19', h_signup_login.LoginHandler),
+    ('/blog/newpost', h_edit_view_posts.EditPostHandler),
+    ('/blog/_edit' + PAGE_RE, h_edit_view_posts.EditPostHandler),
+    ('/blog/_delete' + PAGE_RE, h_edit_view_posts.DeletePostHandler),
+    ('/blog' + PAGE_RE, h_edit_view_posts.ViewPostHandler)
 ], debug=True)
 #-	-	-	-	-	-	-	-	-#
 
@@ -56,14 +56,13 @@ jinja_no_auto = jinja2.Environment(autoescape=False,
 ###
 #FOR USE WITH GETTING THE CURRENTS SECTION INFO#
 def get_currents():
-    posts = bpe_handlers.top_posts()
-    post1 = [posts[0].title, bpe_handlers.strip_tags(posts[0].content[:300]), posts[0].url]
-    post2 = [posts[1].title, bpe_handlers.strip_tags(posts[1].content[:300]), posts[1].url]
+    posts = h_edit_view_posts.top_posts()
+    if posts is None or posts[1] is None:
+        return False
+    post1 = [posts[0].title, h_edit_view_posts.strip_tags(posts[0].content[:300]), posts[0].url]
+    post2 = [posts[1].title, h_edit_view_posts.strip_tags(posts[1].content[:300]), posts[1].url]
     return {'post1': post1, 'post2': post2}
 #-  -   -   -   -   -   -   -   -   -   -   -#
-
-
-
 
 
 ####
