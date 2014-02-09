@@ -12,14 +12,16 @@
     <!-- ADD WHEN YOU FIGURE OUT THE REST!<canvas id="canvas" onscroll="on_scroll()" src="/static/javascript/blindbackground.js"></canvas>-->
     <div class="container">
         <div id="sidebar">
-            <H1>
+            <div id="sidebar-top-navigation">
+                <H1>
                 <a href="/" class="navigationLink">Home</a><br>
                 <a href="/blog" class="navigationLink">Blog</a><br>
                 <a href="/projects" class="navigationLink">Projects</a><br>
                 <a href="/contact" class="navigationLink">Contact</a><br>
-               <hr style="height:4px;border:none;color:#000000;background-color:#000000;">
-               Currents
-           </H1>
+                </H1>
+            </div>
+        <div id="sidebar-bottom-navigation">
+            <H1>Currents</H1>
             <div class="currents">
                 <H3><a href="{{ post1_url }}" class="navigationLink">{{ post1_title }}</a></H3>
                 {{ post1_content }}
@@ -30,9 +32,14 @@
                 {{ post2_content }}
             </div>
         </div>
-        {% block body %} 
-        {% endblock %}
-        <footer><br><br><br><br>Copyright 2058 | <a href="/" style="color:#000000">Home</a> | <a href="/blog" style="color:#000000">Blog</a> | <a href="/projects" style="color:#000000">Projects</a> | <a href="/contact" style="color:#000000">Contact</a> </footer>
+        </div>
+        {% block body %} {% endblock %}
+        <footer>
+            <br>
+            <br>
+            <br>
+            <br>Copyright 2058 | <a href="/" style="color:#000000">Home</a> | <a href="/blog" style="color:#000000">Blog</a> | <a href="/projects" style="color:#000000">Projects</a> | <a href="/contact" style="color:#000000">Contact</a> 
+        </footer>
     </div>
 
 </body>

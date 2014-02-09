@@ -25,25 +25,31 @@ import re
 import data
 import h_static
 import h_signup_login
-import h_edit_view_posts
+import h_edit_posts
+import h_blog_view
+import logging
 from google.appengine.ext import db
+from google.appengine.api import memcache
+from HTMLParser import HTMLParser
+
 
 ###
 # USE FOR MAPPING PAGE TO HANDLER
 PAGE_RE = r'(/(?:[a-zA-Z0-9_-]+/?)*)'
 app = webapp2.WSGIApplication([
     ('/', h_static.HomeHandler),
-    ('/blog/?', h_edit_view_posts.BlogHandler),
+    ('/blog/?', h_blog_view.BlogHandler),
     ('/projects/?', h_static.ProjectsHandler),
     ('/contact/?', h_static.ContactHandler),
     ('/signup', h_signup_login.SignupHandler),
     ('/9z4b3ty6x9lxva0u3u19', h_signup_login.LoginHandler),
-    ('/blog/newpost', h_edit_view_posts.EditPostHandler),
-    ('/blog/_edit' + PAGE_RE, h_edit_view_posts.EditPostHandler),
-    ('/blog/_delete' + PAGE_RE, h_edit_view_posts.DeletePostHandler),
-    ('/blog' + PAGE_RE, h_edit_view_posts.ViewPostHandler)
+    ('/blog/newpost', h_edit_posts.EditPostHandler),
+    ('/blog/_edit' + PAGE_RE, h_edit_posts.EditPostHandler),
+    ('/blog/_delete' + PAGE_RE, h_edit_posts.DeletePostHandler),
+    ('/blog' + PAGE_RE, h_blog_view.ViewPostHandler)
 ], debug=True)
 #-	-	-	-	-	-	-	-	-#
+
 
 ###
 #FOR USE WITH RENDERING STUFF SON
@@ -53,14 +59,30 @@ jinja_no_auto = jinja2.Environment(autoescape=False,
     loader=jinja2.FileSystemLoader(os.path.join(os.path.dirname(__file__), 'templates')))
 #-	-	-	-	-	-	-	-	-#
 
+
+###
+#RETURNS A LIST OF ALL THE POSTS ORDERED DECENDING#
+def top_posts(update = False):
+    key = 'top'
+    posts = memcache.get(key)
+    if posts is None or update:
+        logging.error("DB QUERY")
+        posts = db.GqlQuery("SELECT * FROM Post ORDER BY created DESC")
+        posts = list(posts)
+        memcache.set(key, posts)
+    return posts
+#-  -   -   -   -   -   -   -   -   -   -   -#
+
+
+
 ###
 #FOR USE WITH GETTING THE CURRENTS SECTION INFO#
 def get_currents():
-    posts = h_edit_view_posts.top_posts()
-    if posts is None or posts[1] is None:
+    posts = top_posts()
+    if len(posts) < 2:
         return False
-    post1 = [posts[0].title, h_edit_view_posts.strip_tags(posts[0].content[:300]), posts[0].url]
-    post2 = [posts[1].title, h_edit_view_posts.strip_tags(posts[1].content[:300]), posts[1].url]
+    post1 = [posts[0].title, strip_tags(posts[0].content[:300]), posts[0].url]
+    post2 = [posts[1].title, strip_tags(posts[1].content[:300]), posts[1].url]
     return {'post1': post1, 'post2': post2}
 #-  -   -   -   -   -   -   -   -   -   -   -#
 
@@ -100,4 +122,17 @@ def valid_email(email):
     return not email or EMAIL_RE.match(email)
 #-	-	-	-	-	-	-	-	-	-	-	-	-#
 
-        
+# THIS IS FOR STRIPPING HTML FOR DISPLAY ON BLOG HOME   #
+class MLStripper(HTMLParser):                           #
+    def __init__(self):                                 #
+        self.reset()                                    #
+        self.fed = []                                   #
+    def handle_data(self, d):                           #
+        self.fed.append(d)                              #
+    def get_data(self):                                 #
+        return ''.join(self.fed)                        #
+def strip_tags(html):                                   #
+    s = MLStripper()                                    #
+    s.feed(html)                                        #
+    return s.get_data()                                 #
+# THIS IS FOR STRIPPING HTML FOR DISPLAY ON BLOG HOME   #  
