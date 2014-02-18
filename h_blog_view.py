@@ -26,7 +26,7 @@ class ViewPostHandler(handlers.BaseHandler):
 		for post in posts:
 			# self.response.write(post.url+ " " + url + "<br>")
 			if post.url == url:
-				t_values = {'title_input':post.title,'content_input':post.content}
+				t_values = {'title_input':post.title,'content_input':post.content, 'date_input': post.created.date()}
 				self.write_template('blog-post.html',t_values,False)
 				return
 		# self.error(404)

@@ -2,12 +2,17 @@
 
 
 {% block body %}
-<div id="header">
-	<H1>
-		{{ title_input }}
-	</H1>
-</div>
 <div id="content">
-	{{ content_input }}
+	<div id="header">
+		<H1>
+			{{ title_input }}
+		</H1>
+		<div id="date">
+			{{ date_input }}
+		</div>
+	</div>
+	<div id="content-body">
+		{{ content_input }}
+	</div>
 </div>
 {% endblock %}
