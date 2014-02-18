@@ -21,6 +21,9 @@ handlers:
 - url: /static/javascript
   static_dir: static/javascript
 
+- url: /static/uploads
+  static_dir: static/uploads
+
 - url: /static/videos
   static_dir: static/videos
 
