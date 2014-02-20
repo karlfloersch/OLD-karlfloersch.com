@@ -5,7 +5,14 @@ import logging
 import data
 import main
 
+# Most handlers inherit from BaseHandler.
+# This allows them to check login credentials easily
+# as well as draw the page easily with all the dynamic content
+# that is shared, like the currents.  
 class BaseHandler(webapp2.RequestHandler):
+
+	# A method for writing the HTML to the page. t_values is a dictionary
+	# with values that will replace values in the HTML.
 	def write_template(self, filename, t_values = {}, escape = True):
 		template = None
 		if escape:
@@ -24,6 +31,7 @@ class BaseHandler(webapp2.RequestHandler):
 			t_values['post2_url'] = "/blog" + currents['post2'][2]
 			self.response.out.write(template.render(t_values))
 
+	# This function will take a username and password and log the user in
 	def login_user(self, username, password):
 		has_error = False
 		user = data.User.all().filter("username =", username).get()
@@ -42,6 +50,8 @@ class BaseHandler(webapp2.RequestHandler):
 		self.response.headers.add_header('Set-Cookie', 'user=%s; Path=/' % str(user_cookie))
 		return True
 
+	# check_login makes sure the user is logged in when viewing a page.
+	# This is often done on restricted pages at the very begining.
 	def check_login(self):
 		user_cookie = self.request.cookies.get('user', '0')
 		if not "|" in user_cookie:

@@ -5,21 +5,22 @@ import logging
 import handlers
 import data
 
-
+# LoginHandler displays the login screen and posted with
+# login credentials, will check to see if they are valid.
 class LoginHandler(handlers.BaseHandler):
 	def get(self):
 		self.write_login()
 
+	# Get input and check if that user exists
 	def post(self):
 		username = self.request.get('username')
 		password = self.request.get('password')
-
-
 		if self.login_user(username, password):
 			self.redirect('/')
 		else:
 			self.write_login(username, "Invalid Login.")
 
+	# Draw the login screen. Very simple with user and pass
 	def write_login(self, username = "", error = ""):
 		t_values = {
 			'username': username,
@@ -28,8 +29,12 @@ class LoginHandler(handlers.BaseHandler):
 		self.write_template("login.html", t_values)
 
 
-
+# SignupHandler allows for people to sign up.
+# However, this is not activated normally and only
+# opens up when I want to make a new admin or something.
 class SignupHandler(handlers.BaseHandler):
+	# If we need a new admin, draw the signup forum
+	# Otherwise, just return the person back to home.
 	def get(self):
 		needNewAdmin = False;
 		if needNewAdmin:
@@ -37,7 +42,9 @@ class SignupHandler(handlers.BaseHandler):
 		else:
 			self.redirect('/')
 
-
+	# Assuming we need an admin, this will take the info
+	# and check it for errors, then add a hashed version
+	# to the database.
 	def post(self):
 		needNewAdmin = False;
 		if not needNewAdmin:
@@ -57,7 +64,8 @@ class SignupHandler(handlers.BaseHandler):
 		else: #else info was not valid
 			self.write_form(info_pack[1])
 
-
+	# This creates a user with that user and password
+	# then adds it to the database
 	def add_user(self, username, password, email):
 		password_hash = main.make_pw_hash(username, password)
 
@@ -69,7 +77,7 @@ class SignupHandler(handlers.BaseHandler):
 		a.put()
 		self.login_user(username,password)
 
-
+	# This just validates the user's input
 	def check_info(self, username, password, verify, email):
 		have_error = False
 
@@ -106,6 +114,7 @@ class SignupHandler(handlers.BaseHandler):
 			return (False, t_values)
 		return (True, t_values)
 
+	# A method for writing the form easily
 	def write_form(self, t_values = {'username': '',
 		'email': '',
 		'error_username': '',

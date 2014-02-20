@@ -5,6 +5,7 @@ import handlers
 import data
 import main
 
+# Simple classes for basic HTML pages without any dynamic content.
 
 class MainHandler(handlers.BaseHandler):
 	def get(self):
